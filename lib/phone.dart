@@ -1,3 +1,5 @@
+import 'package:blood_bank/Widget/app_largeText.dart';
+import 'package:blood_bank/Widget/app_smallText.dart';
 import 'package:flutter/material.dart';
 
 class MyPhone extends StatefulWidget {
@@ -28,24 +30,18 @@ class _MyPhoneState extends State<MyPhone> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Image.asset(
-                'assets/login.jpg',
-                width: 130,
-                height: 130,
+                'assets/login_image.jpg',
+                width: 160,
+                height: 160,
               ),
               SizedBox(
                 height: 20,
               ),
-              Text(
-                'Phone Verification',
-                style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
-              ),
+              AppLargeText(text: 'Phone Verification',),
               SizedBox(
-                height: 20,
+                height: 10,
               ),
-              Text(
-                'We need to register your phone before getting started !',
-                textAlign: TextAlign.center,
-              ),
+              AppSmalltext(text: 'We need to register your phone before getting started !',),
               SizedBox(
                 height: 20,
               ),
@@ -62,6 +58,7 @@ class _MyPhoneState extends State<MyPhone> {
                     SizedBox(
                       width: 40,
                       child: TextField(
+                        keyboardType: TextInputType.phone,
                         controller: countrycode,
                         decoration: InputDecoration(border: InputBorder.none),
                       ),
@@ -70,6 +67,7 @@ class _MyPhoneState extends State<MyPhone> {
                     SizedBox(width: 10,),
                     Expanded(
                       child: TextField(
+                        keyboardType: TextInputType.number,
                         decoration: InputDecoration(border: InputBorder.none, hintText: "Phone"),
                       ),
                     ),
