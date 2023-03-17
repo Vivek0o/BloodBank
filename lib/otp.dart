@@ -85,7 +85,7 @@ class _MyOtpState extends State<MyOtp> {
                   onPressed: () {},
                   child: Text('Verify the code'),
                   style: ElevatedButton.styleFrom(
-                      primary: Colors.green.shade400,
+                      primary: Colors.red.shade400,
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(10),
                       )),

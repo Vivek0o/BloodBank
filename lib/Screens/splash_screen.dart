@@ -1,6 +1,6 @@
 import 'dart:async';
+import 'package:blood_bank/Screens/wlecome_screen.dart';
 import 'package:flutter/material.dart';
-import '../phone.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({Key? key}) : super(key: key);
@@ -14,9 +14,9 @@ class _SplashScreenState extends State<SplashScreen> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    Timer(Duration(seconds: 4), () {
+    Timer(Duration(seconds: 2), () {
       Navigator.of(context).pushReplacement(
-        MaterialPageRoute(builder: (_) => MyPhone(),),
+        MaterialPageRoute(builder: (_) => WelcomePage(),),
       );
     });
   }

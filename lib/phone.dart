@@ -86,7 +86,7 @@ class _MyPhoneState extends State<MyPhone> {
                   },
                   child: Text('Send the code'),
                   style: ElevatedButton.styleFrom(
-                      primary: Colors.green.shade400,
+                      primary: Colors.red.shade400,
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(10),
                       )),

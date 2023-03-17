@@ -1,4 +1,5 @@
 import 'package:blood_bank/Screens/splash_screen.dart';
+import 'package:blood_bank/Screens/wlecome_screen.dart';
 import 'package:blood_bank/otp.dart';
 import 'package:blood_bank/phone.dart';
 import 'package:flutter/material.dart';
@@ -11,6 +12,7 @@ void main() {
       'phone': (context) => MyPhone(),
       'otp': (contex) => MyOtp(),
       'splash_screen': (context) => SplashScreen(),
+      'welcome_screen': (context) => WelcomePage(),
     },
   ));
 }
