@@ -1,3 +1,5 @@
+import 'package:blood_bank/phone.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:pinput/pinput.dart';
 
@@ -12,6 +14,8 @@ class MyOtp extends StatefulWidget {
 }
 
 class _MyOtpState extends State<MyOtp> {
+  final FirebaseAuth auth = FirebaseAuth.instance;
+
   @override
   Widget build(BuildContext context) {
     final defaultPinTheme = PinTheme(
@@ -37,6 +41,7 @@ class _MyOtpState extends State<MyOtp> {
         color: Color.fromRGBO(234, 239, 243, 1),
       ),
     );
+    var code = "";
     return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: AppBar(
@@ -46,7 +51,10 @@ class _MyOtpState extends State<MyOtp> {
           onPressed: () {
             Navigator.pop(context);
           },
-          icon: Icon(Icons.arrow_back_ios_new_rounded, color: Colors.black,),
+          icon: Icon(
+            Icons.arrow_back_ios_new_rounded,
+            color: Colors.black,
+          ),
         ),
       ),
       body: Container(
@@ -64,16 +72,24 @@ class _MyOtpState extends State<MyOtp> {
               SizedBox(
                 height: 20,
               ),
-              AppLargeText(text: 'Phone Verification',),
+              AppLargeText(
+                text: 'Phone Verification',
+              ),
               SizedBox(
                 height: 10,
               ),
-              AppSmalltext(text: 'We need to register your phone before getting started !',),
+              AppSmalltext(
+                text: 'We need to register your phone before getting started !',
+              ),
               SizedBox(
                 height: 20,
               ),
               Pinput(
+                length: 6,
                 showCursor: true,
+                onChanged: (value) {
+                  code = value;
+                },
               ),
               SizedBox(
                 height: 20,
@@ -82,7 +98,16 @@ class _MyOtpState extends State<MyOtp> {
                 height: 45,
                 width: double.infinity,
                 child: ElevatedButton(
-                  onPressed: () {},
+                  onPressed: () async {
+                    try {
+                      PhoneAuthCredential credential =
+                          PhoneAuthProvider.credential(
+                              verificationId: MyPhone.verify, smsCode: code);
+                      await auth.signInWithCredential(credential);
+                      Navigator.pushNamedAndRemoveUntil(
+                          context, "SignUp_screen", (route) => false);
+                    } catch (e) {}
+                  },
                   child: Text('Verify the code'),
                   style: ElevatedButton.styleFrom(
                       primary: Colors.red.shade400,
@@ -95,7 +120,8 @@ class _MyOtpState extends State<MyOtp> {
                 children: [
                   TextButton(
                       onPressed: () {
-                        Navigator.pushNamedAndRemoveUntil(context, 'phone', (route) => false);
+                        Navigator.pushNamedAndRemoveUntil(
+                            context, 'phone', (route) => false);
                       },
                       child: Text(
                         "Edit Phone Number?",

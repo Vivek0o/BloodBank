@@ -1,9 +1,12 @@
 import 'package:blood_bank/Widget/app_largeText.dart';
 import 'package:blood_bank/Widget/app_smallText.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class MyPhone extends StatefulWidget {
   const MyPhone({Key? key}) : super(key: key);
+
+  static String verify = "";
 
   @override
   State<MyPhone> createState() => _MyPhoneState();
@@ -12,6 +15,8 @@ class MyPhone extends StatefulWidget {
 class _MyPhoneState extends State<MyPhone> {
 
   TextEditingController countrycode = TextEditingController();
+  var phoneRecord = "";
+
   @override
   void initState() {
     // TODO: implement initState
@@ -37,11 +42,15 @@ class _MyPhoneState extends State<MyPhone> {
               SizedBox(
                 height: 20,
               ),
-              AppLargeText(text: 'Phone Verification',),
+              AppLargeText(
+                text: 'Phone Verification',
+              ),
               SizedBox(
                 height: 10,
               ),
-              AppSmalltext(text: 'We need to register your phone before getting started !',),
+              AppSmalltext(
+                text: 'We need to register your phone before getting started !',
+              ),
               SizedBox(
                 height: 20,
               ),
@@ -63,26 +72,45 @@ class _MyPhoneState extends State<MyPhone> {
                         decoration: InputDecoration(border: InputBorder.none),
                       ),
                     ),
-                    Text('|', style: TextStyle(color: Colors.grey, fontSize: 33),),
-                    SizedBox(width: 10,),
+                    const Text(
+                      '|',
+                      style: TextStyle(color: Colors.grey, fontSize: 33),
+                    ),
+                    const SizedBox(
+                      width: 10,
+                    ),
                     Expanded(
                       child: TextField(
-                        keyboardType: TextInputType.number,
-                        decoration: InputDecoration(border: InputBorder.none, hintText: "Phone"),
+                        onChanged: (value) {
+                          phoneRecord = value;
+                        },
+                        keyboardType: TextInputType.phone,
+                        decoration: InputDecoration(
+                            border: InputBorder.none, hintText: "Phone"),
                       ),
                     ),
                   ],
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 20,
               ),
               SizedBox(
                 height: 45,
                 width: double.infinity,
                 child: ElevatedButton(
-                  onPressed: () {
-                    Navigator.pushNamed(context,"otp");
+                  onPressed: () async {
+                    await FirebaseAuth.instance.verifyPhoneNumber(
+                      phoneNumber: '${countrycode.text + phoneRecord}',
+                      verificationCompleted:
+                          (PhoneAuthCredential credential) {},
+                      verificationFailed: (FirebaseAuthException e) {},
+                      codeSent: (String verificationId, int? resentToken) {
+                        MyPhone.verify = verificationId;
+                        Navigator.pushNamed(context, "otp");
+                      },
+                      codeAutoRetrievalTimeout: (String verificationId) {},
+                    );
                   },
                   child: Text('Send the code'),
                   style: ElevatedButton.styleFrom(
