@@ -1,3 +1,4 @@
+import 'package:blood_bank/constants/routes.dart';
 import 'package:blood_bank/phone.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -105,7 +106,7 @@ class _MyOtpState extends State<MyOtp> {
                               verificationId: MyPhone.verify, smsCode: code);
                       await auth.signInWithCredential(credential);
                       Navigator.pushNamedAndRemoveUntil(
-                          context, "SignUp_screen", (route) => false);
+                          context, Routes.signInScreen, (route) => false);
                     } catch (e) {}
                   },
                   child: Text('Verify the code'),
