@@ -1,9 +1,12 @@
+import 'package:blood_bank/Feed/HomeFeed.dart';
 import 'package:blood_bank/Screens/splash_screen.dart';
 import 'package:blood_bank/Screens/wlecome_screen.dart';
 import 'package:blood_bank/otp.dart';
 import 'package:blood_bank/phone.dart';
+import 'package:blood_bank/constants/routes.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'Screens/SignIn_screen.dart';
 import 'Screens/SignUp_screen.dart';
 
 void main() async {
@@ -12,13 +15,15 @@ void main() async {
 
   runApp(MaterialApp(
     debugShowCheckedModeBanner: false,
-    home: SplashScreen(),
+    initialRoute: Routes.signUpScreen,
     routes: {
-      'phone': (context) => MyPhone(),
-      'otp': (contex) => MyOtp(),
-      'splash_screen': (context) => SplashScreen(),
-      'welcome_screen': (context) => WelcomePage(),
-      'SignUp_screen': (context) => Signup(),
+      "splash": (context) => SplashScreen(),
+      Routes.otpScreen: (context) => MyOtp(),
+      Routes.signUpScreen: (context) => Signup(),
+      Routes.signInScreen: (context) => SignIn(),
+      Routes.phoneScreen: (context) => MyPhone(),
+      Routes.welcomeScreen: (context) => WelcomePage(),
+      Routes.homeFeed: (context) => HomeFeed(),
     },
   ));
 }

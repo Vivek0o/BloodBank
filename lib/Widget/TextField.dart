@@ -3,9 +3,11 @@ import 'package:flutter/material.dart';
 class MyTexField extends StatelessWidget {
   final String hintText;
   final bool obscureText;
+  final bool keyboardType;
 
   MyTexField({Key? key,
   required this.hintText,
+    this.keyboardType = false,
   required this.obscureText,}) : super(key: key);
 
   @override
