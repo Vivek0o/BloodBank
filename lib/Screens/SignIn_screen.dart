@@ -27,7 +27,7 @@ class SignIn extends StatelessWidget {
                 children: [
                   AppLargeText(text: "SignIn", size: 30,color: Colors.red.shade400),
                   Icon(Icons.admin_panel_settings_rounded, color: Colors.red.shade400, size: 60,),
-                  AppLargeText(text: "Welcome back!"),
+                  AppLargeText(text: "Welcome back!."),
                   AppSmalltext(text: "Logged into your Profile to start continue your journey."),
                 ],
               ),
